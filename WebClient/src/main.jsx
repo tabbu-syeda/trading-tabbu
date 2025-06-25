@@ -4,12 +4,13 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router";
 import CallBack from "./CallBack.jsx";
 import Header from "./Header.jsx";
 import Home from "./Home.jsx";
+import { AuthProvider } from "./context/AuthContext.jsx";
 const AppLayout = () => {
   return (
-    <div>
+    <AuthProvider>
       <Header />
       <Outlet />
-    </div>
+    </AuthProvider>
   );
 };
 

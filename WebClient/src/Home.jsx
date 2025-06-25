@@ -5,7 +5,6 @@ const Home = () => {
   return (
     <div className=" text-[18px]">
       <BannerHome />
-      <MarketQuote />
     </div>
   );
 };

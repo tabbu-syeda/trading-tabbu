@@ -1,28 +1,43 @@
-import { useEffect } from "react";
-import { API_BASE_URL } from "../utils/Constant";
+import { useAuth } from "../context/AuthContext";
 
-const Login = ({ isLoggedIn }) => {
-  useEffect(() => {
-    const token = localStorage.getItem("access_token");
-    if (token) {
-      isLoggedIn = true;
-    }
-  }, [isLoggedIn]);
-  const loginToRedirect = ({ isLoggedIn }) => {
-    if (!isLoggedIn) {
-      window.location.href = `${API_BASE_URL}/auth/login`;
-      isLoggedIn = true;
+const Login = () => {
+  const { isLoggedIn, login, logout, user } = useAuth();
+
+  const handleLogin = () => {
+    if (isLoggedIn) {
+      logout();
     } else {
+      login();
     }
   };
   return (
-    <div className="px-5">
+    <div className="m-5 flex items-center space-x-4">
       <button
         className="cursor-pointer border rounded-full px-7 py-3 text-white hover:text-amber-300"
-        onClick={() => loginToRedirect({ isLoggedIn })}
+        onClick={handleLogin}
       >
         {isLoggedIn ? "LOG OUT" : "LOG IN"}
       </button>
+      {user && (
+        <div className="flex items-center space-x-2">
+          <div className="w-10 h-10 rounded-full bg-gray-500 flex items-center justify-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+              />
+            </svg>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

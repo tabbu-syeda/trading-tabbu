@@ -1,11 +1,6 @@
 import { Link } from "react-router";
 import Login from "./components/Login";
 const Header = () => {
-  const token = localStorage.getItem("access_token");
-  let isLoggedIn = false;
-  if (token) {
-    isLoggedIn = true;
-  }
   return (
     <>
       <div className="h-[80px] flex items-center justify-between text-xl dark:bg-black text-white">
@@ -26,14 +21,7 @@ const Header = () => {
           </ul>
         </div>
         <div className="flex flex-row px-5">
-          <Login isLoggedIn={isLoggedIn} />
-          {isLoggedIn ? (
-            ""
-          ) : (
-            <button className="cursor-pointer border rounded-full px-7 py-3 bg-amber-300 text-black hover:text-white">
-              SIGN UP
-            </button>
-          )}
+          <Login />
         </div>
       </div>
       <hr className="border-1 border-amber-300 w-full" />

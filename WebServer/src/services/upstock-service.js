@@ -5,6 +5,7 @@ const {
   MARKET_INDICES,
 } = require("../config/upstock");
 const querystring = require("querystring");
+const { error } = require("console");
 
 class UpstockService {
   constructor() {
@@ -76,7 +77,58 @@ class UpstockService {
       throw new Error("Failed to fetch market quotes");
     }
   }
+
+  async logoutUpstockUser() {
+    if (!this.access_token) {
+      console.error("Access token not found. Please login.");
+      throw new Error("Access token not found. Please login.");
+    }
+    const logoutURL = `${this.baseUrl}/v2/logout`;
+    try {
+      const response = await axios.delete(logoutURL, {
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${this.access_token}`,
+        },
+      });
+      if (response.data) {
+        console.log("User logged out successfully");
+        this.access_token = null; // Clear the access token
+        return response.data;
+      }
+    } catch (error) {
+      console.error("Error logging out:", error);
+      throw new Error("Failed to logout user");
+    }
+  }
+
+  async getUserProfile(token) {
+    try {
+      console.log("Token from request headers:", token);
+      if (!token) {
+        console.error("Access token not found in request headers.");
+        res.status(401).json({
+          error: "Access token not found",
+        });
+      }
+      var profileUrl = `${this.baseUrl}/v2/user/profile`;
+      const response = await axios.get(profileUrl, {
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.status === 200) {
+        //req.user = response.data?.data;
+        return response.data;
+      } else {
+        console.error("Failed to fetch user profile:", response.statusText);
+        throw new Error("Failed to fetch user profile" + error.message);
+      }
+    } catch (error) {
+      throw new Error("Failed to fetch user profile" + error.message);
+    }
+  }
 }
 
-module.exports = new UpstockService();
-// This service provides methods to interact with the Upstox API, including generating the authorization URL.
+module.exports = new UpstockService(); 
