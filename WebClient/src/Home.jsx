@@ -1,7 +1,12 @@
+import { useAuth } from "./context/AuthContext";
 import BannerHome from "./components/BannerHome";
-import MarketQuote from "./components/MarketQuote";
-
 const Home = () => {
+  const { isLoggedIn } = useAuth();
+
+  if (isLoggedIn) {
+    window.location.href = "/explore";
+  }
+
   return (
     <div className=" text-[18px]">
       <BannerHome />

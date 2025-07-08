@@ -11,14 +11,14 @@ const UPSTOX_CONFIG = {
   // API endpoints
   ENDPOINTS: {
     MARKET_QUOTE: "/v2/market-quote/quotes",
-    MARKET_DATA: "/v2/market-quote/ltp",
-    HISTORICAL_DATA: "/v2/historical-candle",
-    PLACE_ORDER: "/v2/order/place",
-    ORDER_BOOK: "/v2/order/retrieve-all",
-    POSITIONS: "/v2/portfolio/long-term-holdings",
-    PORTFOLIO: "/v2/portfolio/short-term-holdings",
-    PROFILE: "/v2/user/profile",
-    FUNDS: "/v2/user/get-funds-and-margin",
+    MARKET_DATA: "/v3/market-quote/ltp",
+    HISTORICAL_DATA: "/v3/historical-candle",
+    PLACE_ORDER: "/v3/order/place",
+    ORDER_BOOK: "/v3/order/retrieve-all",
+    POSITIONS: "/v3/portfolio/long-term-holdings",
+    PORTFOLIO: "/v3/portfolio/short-term-holdings",
+    PROFILE: "/v3/user/profile",
+    FUNDS: "/v3/user/get-funds-and-margin",
   },
 };
 

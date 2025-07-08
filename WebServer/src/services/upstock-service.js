@@ -104,7 +104,6 @@ class UpstockService {
 
   async getUserProfile(token) {
     try {
-      console.log("Token from request headers:", token);
       if (!token) {
         console.error("Access token not found in request headers.");
         res.status(401).json({
@@ -119,7 +118,6 @@ class UpstockService {
         },
       });
       if (response.status === 200) {
-        //req.user = response.data?.data;
         return response.data;
       } else {
         console.error("Failed to fetch user profile:", response.statusText);
@@ -129,6 +127,28 @@ class UpstockService {
       throw new Error("Failed to fetch user profile" + error.message);
     }
   }
+
+  async getIndices(token) {
+    try {
+      const symbols = Object.values(MARKET_INDICES).join(",");
+      const indicesUrl = `${this.baseUrl}${UPSTOX_CONFIG.ENDPOINTS.MARKET_DATA}`;
+      const response = await axios.get(indicesUrl, {
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          instrument_key: symbols,
+        },
+      });
+      if (response.status === 200) {
+        return response.data;
+      }
+    } catch (error) {
+      console.error("Error fetching indices:", error);
+      throw new Error("Failed to fetch indices");
+    }
+  }
 }
 
-module.exports = new UpstockService(); 
+module.exports = new UpstockService();

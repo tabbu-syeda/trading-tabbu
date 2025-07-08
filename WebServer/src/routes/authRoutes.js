@@ -57,7 +57,6 @@ router.get("/verify", async (req, res) => {
     var token = req?.headers?.authorization.replace("Bearer ", "");
     const response = await upstoxAuthService.getUserProfile(token);
     if (response) {
-      console.log("User profile retrieved successfully:", response);
       return res.status(200).json({
         success: true,
         profile: {

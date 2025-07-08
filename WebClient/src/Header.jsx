@@ -9,8 +9,10 @@ const Header = () => {
         </Link>
         <div>
           <ul className="flex flex-row px-10 mx-2">
-            <Link to="/">
-              <li className="px-4">OUR SERVICES</li>
+            <Link to="/explore">
+              <li className="px-4 hover:border-amber-300 hover:border-b-3 ">
+                EXPLORE
+              </li>
             </Link>
             <Link to="/">
               <li className="px-4">OUR MISSION</li>

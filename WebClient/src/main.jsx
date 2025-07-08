@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router";
 import CallBack from "./CallBack.jsx";
 import Header from "./Header.jsx";
 import Home from "./Home.jsx";
+import Explore from "./Explore.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 const AppLayout = () => {
   return (
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "/callback",
         element: <CallBack />,
+      },
+      {
+        path: "/explore",
+        element: <Explore />,
       },
     ],
   },
