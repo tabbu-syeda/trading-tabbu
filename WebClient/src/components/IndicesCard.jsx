@@ -20,22 +20,32 @@ const IndicesCard = ({ index }) => {
         const item = index[key];
         return (
           <div className="text-center" key={item.instrument_token}>
-            <p className="text-xl">
-              {getIndiceName(item.instrument_token)}
-              <span
-                className={`text-xl ${
-                  item.last_price > item.cp ? "text-green-500" : "text-red-500"
-                } px-3`}
-              >
-                <span>₹{item.last_price}</span>
-                <span>
-                  {((item.last_price - item.cp) / item.cp) * 100 > 0
-                    ? "+"
-                    : "-"}
-                  {Math.abs(
-                    ((item.last_price - item.cp) / item.cp) * 100
-                  ).toFixed(2)}
-                  %
+            <p className="text-lg text-white">
+              <span className="text-lg" style={{ fontSize: "18px" }}>
+                {getIndiceName(item.instrument_token)}
+              </span>
+              <span className="text-base" style={{ fontSize: "16px" }}>
+                <span className="ml-3 text-gray-300">{item.last_price}</span>
+                <span
+                  className={`${
+                    item.last_price > item.cp
+                      ? "text-green-500"
+                      : "text-red-500"
+                  } px-3`}
+                >
+                  <span className="pl-1">
+                    {Math.abs(item.last_price - item.cp).toFixed(2)}
+                  </span>
+                  <span className="px-1">
+                    (
+                    {((item.last_price - item.cp) / item.cp) * 100 > 0
+                      ? "+"
+                      : "-"}
+                    {Math.abs(
+                      ((item.last_price - item.cp) / item.cp) * 100
+                    ).toFixed(2)}
+                    %)
+                  </span>
                 </span>
               </span>
             </p>

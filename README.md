@@ -2,7 +2,7 @@
 
 ## Overview
 
-This full-stack application leverages Node.js on the backend and React on the frontend to interact with Upstox APIs and display real-time market data.
+This is a full-stack application leverages Node.js on the backend and React on the frontend to interact with Upstox APIs and display real-time market data.
 
 - **WebServer** : This has whole of the node js code where main server calls happen
 - **WebClient** : This has the react application running on vite that consumes the api data and fetches to the user.

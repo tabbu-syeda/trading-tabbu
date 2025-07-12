@@ -6,6 +6,7 @@ import Header from "./Header.jsx";
 import Home from "./Home.jsx";
 import Explore from "./Explore.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
+import PageNotFound from "./PageNotFount.jsx";
 const AppLayout = () => {
   return (
     <AuthProvider>
@@ -19,7 +20,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <AppLayout />,
-    errorElement: <div>Invalid Url!</div>,
+    errorElement: <PageNotFound />,
     children: [
       {
         path: "/",

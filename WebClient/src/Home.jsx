@@ -8,7 +8,7 @@ const Home = () => {
   }
 
   return (
-    <div className=" text-[18px]">
+    <div className="text-[18px]">
       <BannerHome />
     </div>
   );
