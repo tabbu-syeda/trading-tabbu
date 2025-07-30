@@ -5,6 +5,11 @@ const UPSTOX_CONFIG = {
   ApiKey: "f7599e1b-00da-44d0-9e34-8a54b39e2cd9",
   ApiSecret: "uxnft80hu8",
 
+  NSEJsonFile:
+    "D:\\Learning\\Personal Projects\\Full Stack\\TradingTabbu\\WebServer\\MarketInstrument\\NSE.json",
+
+  BSEJsonFile:
+    "D:\\Learning\\Personal Projects\\Full Stack\\TradingTabbu\\WebServer\\MarketInstrument\\BSE.json",
   // Upstox API URLs
   SANDBOX_BASE_URL: "https://api.upstox.com",
 

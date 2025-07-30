@@ -1,13 +1,19 @@
 const e = require("express");
 const router = e.Router();
 const upstoxService = require("../services/upstock-service");
+const dataService = require("../services/data-service");
 
 router.get("/indices", async (req, res) => {
   const token = req?.headers?.authorization.replace("Bearer ", "");
-  console.log("Header: " + JSON.stringify(req.headers));
   // Extract token from Authorization header
   try {
-    const indices = await upstoxService.getIndices(token);
+    const keys = await dataService.getAllIndices();
+    const sortedKeys = keys.sort((a, b) => a.length - b.length);
+    const firstFour = sortedKeys.slice(0, 4);
+    const lastFour = sortedKeys.slice(-4);
+    const filteredKeys = [...firstFour, ...lastFour];
+    console.log("Keys of indices from data service : " + filteredKeys);
+    const indices = await upstoxService.getIndices(token, filteredKeys);
     res.status(200).json({ data: indices });
   } catch (error) {
     console.error("Error fetching indices:", error);

@@ -43,18 +43,26 @@ const IndicesHome = () => {
   });
 
   return (
-    <div className="flex justify-around items-center py-4">
-      {filterdIndices &&
-        isLoggedIn &&
-        filterdIndices?.map((index, idx) => (
-          <IndicesCard index={index} key={idx} />
-        ))}
-      {!isLoggedIn && (
-        <div className="text-center text-red-500">
-          Please log in to view indices.
-        </div>
-      )}
-    </div>
+    <>
+      <div className="flex overflow-x-auto no-scrollbar scroll-smooth snap-x items-center justify-start px-2">
+        {filterdIndices &&
+          isLoggedIn &&
+          filterdIndices?.map((index, idx) => (
+            <IndicesCard index={index} key={idx} />
+          ))}
+        {!isLoggedIn && (
+          <div className="text-center text-red-500">
+            Please log in to view indices.
+          </div>
+        )}
+        {filterdIndices.length === 0 && isLoggedIn && (
+          <div className="text-center text-gray-500">
+            No indices available at the moment.
+          </div>
+        )}
+      </div>
+      
+    </>
   );
 };
 

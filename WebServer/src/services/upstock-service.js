@@ -128,9 +128,10 @@ class UpstockService {
     }
   }
 
-  async getIndices(token) {
+  async getIndices(token, keys) {
     try {
-      const symbols = Object.values(MARKET_INDICES).join(",");
+      const symbols = Object.values(MARKET_INDICES);
+      const allkeys = [...symbols, ...keys];
       const indicesUrl = `${this.baseUrl}${UPSTOX_CONFIG.ENDPOINTS.MARKET_DATA}`;
       const response = await axios.get(indicesUrl, {
         headers: {
@@ -138,7 +139,10 @@ class UpstockService {
           Authorization: `Bearer ${token}`,
         },
         params: {
-          instrument_key: symbols,
+          instrument_key: allkeys
+            .join(",")
+            .replace(/%7C/g, "|")
+            .replace(/\s/g, " "),
         },
       });
       if (response.status === 200) {

@@ -5,3 +5,18 @@
   font-weight: 400;   
   color-scheme:  light dark;
 }
+
+/* For Webkit-based browsers (Chrome, Safari, Opera) */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* For IE and Edge */
+.no-scrollbar {
+  -ms-overflow-style: none;
+}
+
+/* For Firefox */
+.no-scrollbar {
+  scrollbar-width: none;
+}

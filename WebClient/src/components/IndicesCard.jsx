@@ -5,10 +5,6 @@ import React from "react";
 // The component maps through the keys of the index object and displays relevant information
 // It skips the 'name' key and formats the last price and change percentage
 const IndicesCard = ({ index }) => {
-  console.log("Index Data: ", index);
-  for (let key in index) {
-    console.log(`Key: ${key}, Value: ${index[key]}`);
-  }
   const getIndiceName = (token) => {
     var splitVal = token.split("|")[1];
     return splitVal ? splitVal : token;
@@ -19,12 +15,16 @@ const IndicesCard = ({ index }) => {
         if (key === "name") return null;
         const item = index[key];
         return (
-          <div className="text-center" key={item.instrument_token}>
+          <div
+            className="py-2"
+            key={item.instrument_token}
+            style={{ paddingRight: "20px" }}
+          >
             <p className="text-lg text-white">
-              <span className="text-lg" style={{ fontSize: "18px" }}>
+              <span className="text-[16px]">
                 {getIndiceName(item.instrument_token)}
               </span>
-              <span className="text-base" style={{ fontSize: "16px" }}>
+              <span className="text-[14px]">
                 <span className="ml-3 text-gray-300">{item.last_price}</span>
                 <span
                   className={`${
