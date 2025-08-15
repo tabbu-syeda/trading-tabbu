@@ -13,6 +13,7 @@ This is a full-stack application leverages Node.js on the backend and React on t
 - **Upstox API Integration**: The server connects to Upstox APIs to fetch real-time market data, such as stock quotes, user profiles, and authentication tokens.
 - **Endpoints**: Provides various endpoints for user authentication, and session management.
 - **Dependencies**: Utilizes packages like `axios` for HTTP requests, `express` for server handling, and `jsonwebtoken` for token management.
+- **WebSocket** : Using ws package to create a dedicted websocket server in node app, and running the socket on same port as HTTP.
 
 ### Frontend
 
@@ -20,8 +21,11 @@ This is a full-stack application leverages Node.js on the backend and React on t
 - **API Consumption**: React components make use of `axios` to call backend endpoints and fetch data.
 - **Routing**: Utilizes `react-router` for navigation and handling different views such as home, explore, and callback pages.
 - **Styling**: Incorporates `tailwindcss` for styling components with utility-first classes.
+- **WebSocket**: Using WS socket library to get real time data. reading the socket connection on same port as its hosted on.
 
 ### Key Features
 
 - Secure user authentication and session management.
-- Real-time market data fetching and display.
+- Market Explore Page:
+  - Real-time market data fetching and display of popular market Indices.
+  - Reading the full market data from Upstock api for instrument key to get sanpshot of each indices.

@@ -22,7 +22,6 @@ class DataService {
           indicesKey.push(this.nseData[key].instrument_key);
         }
       }
-      console.log("indices keys count: " + indicesKey.length);
       return indicesKey;
     } catch (error) {
       console.error(

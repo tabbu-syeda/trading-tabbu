@@ -1,9 +1,5 @@
 const axios = require("axios");
-const {
-  UPSTOX_CONFIG,
-  NIFTY_50_SYMBOLS,
-  MARKET_INDICES,
-} = require("../config/upstock");
+const { UPSTOX_CONFIG, MARKET_INDICES } = require("../config/upstock");
 const querystring = require("querystring");
 const { error } = require("console");
 
@@ -11,6 +7,10 @@ class UpstockService {
   constructor() {
     this.access_token = null;
     this.baseUrl = UPSTOX_CONFIG.SANDBOX_BASE_URL;
+    console.log(
+      "UpstockService initialized with access token:",
+      this.access_token
+    );
   }
 
   getAuthorizationUrl() {
@@ -51,7 +51,6 @@ class UpstockService {
 
   async getMarketQuotes(instrument) {
     if (!this.access_token) {
-      console.error("Access token not found. Please login.");
       throw new Error("Access token not found. Please login.");
     }
     const quoteUrl = `${this.baseUrl}${UPSTOX_CONFIG.ENDPOINTS.MARKET_QUOTE}`;
@@ -66,14 +65,11 @@ class UpstockService {
         },
         params: params,
       });
-      console.log("Response status:", response.status);
       console.log("Response data:", response.data);
       if (response.status === 200) {
-        console.log("Market quotes fetched successfully:", response.data);
         return JSON.stringify(response.data);
       }
     } catch (error) {
-      console.error("Error fetching market quotes:", error);
       throw new Error("Failed to fetch market quotes");
     }
   }
@@ -152,6 +148,9 @@ class UpstockService {
       console.error("Error fetching indices:", error);
       throw new Error("Failed to fetch indices");
     }
+  }
+  getAccessTokenValue() {
+    return this.access_token;
   }
 }
 

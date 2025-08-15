@@ -3,15 +3,28 @@ import axios from "axios";
 import { API_BASE_URL } from "../utils/Constant";
 import { useAuth } from "../context/AuthContext";
 import IndicesCard from "./IndicesCard";
+import { useContext } from "react";
+import MarketDataContext from "../context/IndicesContext";
 
 const IndicesHome = () => {
   const [indices, setIndices] = useState([]);
   const { isLoggedIn } = useAuth();
-
+  const indicesdataWS = useContext(MarketDataContext);
   useEffect(() => {
-    fetchIndices();
+    if (
+      indicesdataWS != null &&
+      indicesdataWS.length > 0 &&
+      isfeedData(indicesdataWS)
+    ) {
+      console.log("Received indices data from WebSocket:", indicesdataWS);
+      setIndices(indicesdataWS);
+    } else fetchIndices();
   }, []);
 
+  function isfeedData(data) {
+    if (!data) return false;
+    return Object.keys(data)[0] == "feeds";
+  }
   const fetchIndices = async () => {
     try {
       if (!isLoggedIn) {
@@ -29,6 +42,7 @@ const IndicesHome = () => {
           name: key,
           ...indicesData[key],
         }));
+
         setIndices(formattedData);
       }
     } catch (error) {
@@ -61,7 +75,6 @@ const IndicesHome = () => {
           </div>
         )}
       </div>
-      
     </>
   );
 };
